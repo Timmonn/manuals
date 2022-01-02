@@ -18,32 +18,32 @@
 
 `cfdisk /dev/sdx` 
 
-`/dev/sdx1` размером 31 Мб типа Bios boot 
-`/dev/sdx2` размером 300-500 Мб типа Efi system 
-`/dev/sdx3` размером 512 Мб типа swap   (swap создаем только если меньше 2 gb оперативной памяти)
-`/dev/sdx4` остальной размер типа root или Linux file system
+`/dev/sdx1` размером 31 Мб типа Bios boot  
+`/dev/sdx2` размером 300-500 Мб типа Efi system  
+`/dev/sdx3` размером 512 Мб типа swap   (swap создаем только если меньше 2 gb оперативной памяти)  
+`/dev/sdx4` остальной размер типа root или Linux file system  
 
 ## Форматирование диска
 
-`mkfs.vfat /dev/sdx2`  (раздел Efi system) 
-`mkfs.btrfs /dev/sdx4` (раздел root)
-`mkswap  /dev/sdx3` (раздел swap )
-`swapon /dev/sdx3`  (включить swap)
+`mkfs.vfat /dev/sdx2`  (раздел Efi system)   
+`mkfs.btrfs /dev/sdx4` (раздел root)  
+`mkswap  /dev/sdx3` (раздел swap )  
+`swapon /dev/sdx3`  (включить swap)  
 
-Раздел который 31 Мб типа Bios boot не трогаем
+Раздел который 31 Мб типа Bios boot не трогаем  
 
 ## Монтирование разделов 
 
-`mount /dev/sdx4 /mnt`  монтируем корневой или root
-`mkdir /mnt/boot` создаем каталог для загрузчика - если обычный BIOS
+`mount /dev/sdx4 /mnt`  монтируем корневой или root  
+`mkdir /mnt/boot` создаем каталог для загрузчика - если обычный BIOS  
 
-​    если UEFI вводим еще одну команду:
+​    если UEFI вводим еще одну команду:  
 
-​    `mkdir /mnt/boot/EFI`
+​    `mkdir /mnt/boot/EFI`  
 
-`mount /dev/sdx2 /mnt/boot` монтируем Efi system бут раздел для обычного Bios
+`mount /dev/sdx2 /mnt/boot` монтируем Efi system бут раздел для обычного Bios  
 
-​    `mount /dev/sdx2 /mnt/boot/EFi` для UEFI биоса
+​    `mount /dev/sdx2 /mnt/boot/EFi` для UEFI биоса  
 
 
 
@@ -61,45 +61,45 @@
 
 ## Часовой пояс
 
-`ln -sf /usr/share/zoneinfo/Регион(Europe)/Город(Ekaterinburg) /etc/localtime`
+`ln -sf /usr/share/zoneinfo/Регион(Europe)/Город(Ekaterinburg) /etc/localtime`  
 
 `hwclock --systohc`
 
 ## Локализация
 
-`nano /etc/locale.gen`   убрать решетки с нужных локалей  (английский обязательно !)
+`nano /etc/locale.gen`   убрать решетки с нужных локалей  (английский обязательно !)  
 
 *например оставляем это* 
 
-`en_US.UTF-8 UTF-8`
-`ru_RU.UTF-8 UTF-8`
+`en_US.UTF-8 UTF-8`  
+`ru_RU.UTF-8 UTF-8`  
 
-`locale-gen` потом генерируем локали 
-`nano /etc/locale.conf` -далее редактируем конф пишем там:
+`locale-gen` потом генерируем локали  
+`nano /etc/locale.conf` -далее редактируем конф пишем там:  
 
-`LANG=ru_RU.UTF-8`
+`LANG=ru_RU.UTF-8`  
 
-`nano /etc/vconsole.conf` -потом точно также редактируем vconsole пишем там:
+`nano /etc/vconsole.conf` -потом точно также редактируем vconsole пишем там:  
 
-`KEYMAP=ru`
+`KEYMAP=ru`  
 
-``FONT=cyr-sun16`
+``FONT=cyr-sun16`  
 
 ## Настройка сети
 
-`nano /etc/hostname` имя компьютера
+`nano /etc/hostname` имя компьютера  
 
-`nano /etc/hosts` далее файл доменных имен 
+`nano /etc/hosts` далее файл доменных имен  
 
-127.0.0.1	localhost
-::1		localhost
-127.0.1.1	моёимякомпьютера.localdomain    моёимякомпьютера
+127.0.0.1	localhost  
+::1		localhost  
+127.0.1.1	моёимякомпьютера.localdomain    моёимякомпьютера  
 
 ## Initramfs
 
-`mkinitcpio -p linux-zen` если ядер несколько
+`mkinitcpio -p linux-zen` если ядер несколько  
 
-`mkinitcpio -P linux-zen`  если ядро одно
+`mkinitcpio -P linux-zen`  если ядро одно  
 
 
 ## Пароль суперпользователя
