@@ -2,17 +2,17 @@
 
 ## Разметка диска 
 
-`fdisk -l` *смотрим какие диски и разделы есть*
+`fdisk -l` смотрим какие диски и разделы есть  
 
 `fdisk /dev/sdx` подключаемся к диску и далее работаем в утилите fdisk 
 
-​    Если диск размечен и есть разделы:
+​    Если диск размечен и есть разделы:  
 
-​    `d` *-удаляем ненужные разделы по очереди (если разделов нет то пропускаем этот шаг)*
+​    `d` -удаляем ненужные разделы по очереди (если разделов нет то пропускаем этот шаг)  
 
-Далее там же в fdisk:
-`g` *-таблицу разделов размечаем как GPT*
-`w` *-записываем и выходим*
+Далее там же в fdisk:  
+`g` -таблицу разделов размечаем как GPT  
+`w` -записываем и выходим  
 
 ## Создание разделов
 
@@ -49,7 +49,8 @@
 
 # Установка базовой системы 
 
-`pacstrap -i /mnt base base-devel linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs intel-ucode iucode-tool nano`  (`amd-ucode` если amd)
+`pacstrap -i /mnt base base-devel linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs intel-ucode iucode-tool nano`  
+`amd-ucode` если amd  
 
 ## Генерация конфига разделов 
 
@@ -83,7 +84,7 @@
 
 `KEYMAP=ru`  
 
-``FONT=cyr-sun16`  
+`FONT=cyr-sun16`  
 
 ## Настройка сети
 
@@ -104,36 +105,36 @@
 
 ## Пароль суперпользователя
 
-`passwd`
+`passwd`  
 
 # Устанавливаем загрузчик и сетевые утилиты 
 
-`pacman -S grub efibootmgr dhcpcd dhclient networkamanager` 
+`pacman -S grub efibootmgr dhcpcd dhclient networkamanager`  
 
 устанавливаем загрузчик 
 
-`grub-install /dev/sdx` загрузчик ставим НЕ на раздел , а на диск на котором ставим систему
+`grub-install /dev/sdx` загрузчик ставим НЕ на раздел , а на диск на котором ставим систему  
 
 `grub-mkconfig -o /boot/grub/grub.cfg` конфигурируем загрузчик 
 
 
-потом выходим из chroot
+потом выходим из chroot  
 
-`exit` 
-
-
-`umount -R /mnt` 
+`exit`  
 
 
-`useradd -m -G wheel -s /bin/bash юзернейм` логинимся в систему создаем учетную запись юзера 
+`umount -R /mnt`  
 
-`passwd юзернейм` 
 
-`nano /etc/sudoers`  раскоменчиваем строку разрешающую группе или юзеру wheel запускать любые команды
+`useradd -m -G wheel -s /bin/bash юзернейм` логинимся в систему создаем учетную запись юзера  
+
+`passwd юзернейм`  
+
+`nano /etc/sudoers`  раскоменчиваем строку разрешающую группе или юзеру wheel запускать любые команды  
 
 # Устанавливаем пакеты графики и оболочку
 
-Наборы пакетов видео ускорения вводим после sudo pacman -Syu
+Наборы пакетов видео ускорения вводим после `sudo pacman -Syu`  
 
 ## Intel
 
@@ -149,12 +150,11 @@ https://aur.archlinux.org/packages/nvidia-dkms-performance/
 
 устанавливаем:
 
-1) git clone [https://aur.archlinux.org/nvidia-dkms...](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbS0xNzE5Qk1lTVJCTVV0S1ZYNzdNVk82ZDExUXxBQ3Jtc0trX1M4c3dxVjNObEd0V1VCMlo0dnJVS21jQ1dTQ2pDLWd4NnJxUmNGczYwWUVJZU1EaXN1Rm5GOVdQSTNrcG52TFBHZ1BHek1JZG5SSktpaXl6eEtmVWcwZXNRVzY0eXp3WDVoZlljSjFQa3lZVWhuUQ&q=https%3A%2F%2Faur.archlinux.org%2Fnvidia-dkms-performance.git&v=aMnaM7llZhM) 
-
-2) cd nvidia-dkms-performance
-3) makepkg -sric  ( там соглашаемся с заменой пакета )
-4) sudo mkinitcpio -p наименование вашего ядра
-5) reboot 
+1) git clone https://aur.archlinux.org/nvidia-dkms-performance.git   
+2) cd nvidia-dkms-performance  
+3) makepkg -sric  ( там соглашаемся с заменой пакета )  
+4) sudo mkinitcpio -p наименование вашего ядра  
+5) reboot  
 
 ## AMD
 
