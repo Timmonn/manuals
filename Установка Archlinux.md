@@ -131,8 +131,12 @@
 `passwd юзернейм`  
 
 `nano /etc/sudoers`  раскоменчиваем строку разрешающую группе или юзеру wheel запускать любые команды  
+`systemctl enable NetworkManager` включаем сеть в автозагрузку   
+`reboot`  
 
 # Устанавливаем пакеты графики и оболочку
+
+`sudo nano /etc/pacman.conf` включаем, раскомменчиваем [multilib] и include = /etc/pacman.d/mirrorlist репозиторий  
 
 Наборы пакетов видео ускорения вводим после `sudo pacman -Syu`  
 
