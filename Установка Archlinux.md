@@ -123,7 +123,7 @@
 `exit`  
 
 
-`umount -R /mnt`  
+`umount -R /mnt` и `reboot` Размонтируем все и перезагружаемся  
 
 
 `useradd -m -G wheel -s /bin/bash юзернейм` логинимся в систему создаем учетную запись юзера  
